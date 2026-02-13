@@ -1,0 +1,249 @@
+/* ตั้งค่าฟอนต์ (ถ้าอยากได้ฟอนต์สวยๆ แนะนำให้ import Sarabun หรือฟอนต์อื่นๆ ใน index.html) */
+@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@400;700&display=swap');
+
+:root {
+  --primary-pink: #d81b60;
+  --soft-pink: #ffeef2;
+  --bg-gradient: radial-gradient(circle, #fff0f5 0%, #ffcdd2 100%);
+}
+
+/* คอนเทนเนอร์หลัก เต็มหน้าจอ */
+.main-container {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg-gradient);
+  font-family: 'Sarabun', sans-serif;
+  overflow: hidden; /* ซ่อน scrollbar */
+  position: relative;
+}
+
+/* ตัวหุ้มเนื้อหาให้อยู่ตรงกลาง */
+.content-wrapper {
+  text-align: center;
+  z-index: 10; /* ให้อยู่เหนือพลุกระดาษ */
+  padding: 20px;
+}
+
+/* ===========================
+   ส่วนที่ 1: กล่องของขวัญ (ก่อนเปิด)
+   =========================== */
+.gift-box-container {
+  cursor: pointer;
+  /* เพิ่ม transition ให้ดูนุ่มนวลตอนเอาเมาส์ชี้ */
+  transition: transform 0.3s ease;
+}
+
+.gift-box-container:hover {
+  transform: scale(1.05); /* ขยายขึ้นนิดหน่อยตอนชี้ */
+}
+
+.gift-icon {
+  font-size: 8rem; /* ขนาดกล่อง */
+  display: inline-block;
+  /* ใส่เงาให้ดูลอยๆ */
+  filter: drop-shadow(0 10px 15px rgba(216, 27, 96, 0.3));
+}
+
+/* กล่องของขวัญที่วาดด้วย CSS */
+.gift-box {
+  width: 200px;
+  height: 180px;
+  position: relative;
+  display: inline-block;
+  filter: drop-shadow(0 10px 20px rgba(216, 27, 96, 0.4));
+}
+
+.gift-box-body {
+  width: 100%;
+  height: 140px;
+  background: linear-gradient(135deg, #ff6b9d 0%, #d81b60 100%);
+  border-radius: 10px;
+  position: relative;
+  box-sizing: border-box;
+}
+
+/* เส้นทะแยง (สายแบ่งกล่อง) */
+.gift-box-body::before {
+  content: '';
+  position: absolute;
+  width: 6px;
+  height: 100%;
+  background: #ffd700;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 3px;
+  top: 0;
+}
+
+.gift-box-body::after {
+  content: '';
+  position: absolute;
+  height: 6px;
+  width: 100%;
+  background: #ffd700;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 3px;
+  left: 0;
+}
+
+/* ฝากล่อง */
+.gift-box-lid {
+  width: 110%;
+  height: 50px;
+  background: linear-gradient(135deg, #ff8fab 0%, #ff69b4 100%);
+  border-radius: 10px;
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 3px solid #ffd700;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* โบว์บนฝากล่อง */
+.gift-box-lid::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #ffd700;
+  border-radius: 50%;
+  top: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.gift-box-lid::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: #ffd700;
+  border-radius: 50%;
+  top: -15px;
+  left: calc(50% - 25px);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
+}
+
+.click-instruction {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  color: var(--primary-pink);
+  font-weight: bold;
+  /* Animation ตัวหนังสือกระพริบ */
+  animation: pulseText 1.5s infinite ease-in-out;
+}
+
+
+/* ===========================
+   ส่วนที่ 2: ดอกไม้ (หลังเปิด)
+   =========================== */
+.flower-reveal-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-size: 2rem;
+  color: var(--primary-pink);
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* กรอบรูปสไตล์โพลารอยด์ */
+.polaroid-frame {
+  background: white;
+  padding: 15px 15px 50px 15px; /* เว้นด้านล่างเยอะๆ เหมือนโพลารอยด์ */
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+  transform: rotate(-3deg); /* เอียงนิดๆ ให้ดูน่ารัก */
+  max-width: 90%;
+  width: 320px; /* กำหนดความกว้างของรูป */
+  transition: transform 0.3s;
+}
+.polaroid-frame:hover {
+    transform: rotate(0deg) scale(1.02); /* พอชี้แล้วรูปตรง */
+}
+
+.flower-image {
+  width: 100%;
+  height: auto;
+  border-radius: 2px;
+  display: block;
+  background: linear-gradient(135deg, #fff9e6 0%, #ffe6f0 100%);
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.message {
+  margin-top: 30px;
+  font-size: 1.2rem;
+  color: #880e4f;
+  font-weight: 500;
+  max-width: 80%;
+}
+
+.reset-button {
+    margin-top: 25px;
+    padding: 10px 24px;
+    background-color: var(--primary-pink);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: background-color 0.2s;
+}
+.reset-button:hover {
+    background-color: #ad1457;
+}
+
+
+/* ===========================
+   Animations (หัวใจสำคัญ)
+   =========================== */
+
+/* 1. ท่ากล่องสั่น (Shaking) */
+.shaking {
+  animation: shake 2.5s ease-in-out infinite;
+  transform-origin: center bottom;
+}
+
+@keyframes shake {
+  0%, 100% { transform: rotate(0deg); }
+  10% { transform: rotate(-5deg); }
+  20% { transform: rotate(5deg); }
+  30% { transform: rotate(-5deg); }
+  40% { transform: rotate(5deg); }
+  50%, 90% { transform: rotate(0deg); } /* หยุดพักแป๊บนึง */
+}
+
+/* 2. ตัวหนังสือกระพริบ */
+@keyframes pulseText {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(0.98); }
+}
+
+/* 3. ท่าดอกไม้เด้งออกมา (Pop In) - สำคัญมากสำหรับความรู้สึก "เปิดเจอ" */
+.popping-in {
+    /* เริ่มต้น: จางๆ, เล็กๆ, อยู่ต่ำๆ */
+    animation: popUpEntrance 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes popUpEntrance {
+    from {
+        opacity: 0;
+        transform: scale(0.5) translateY(50px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
